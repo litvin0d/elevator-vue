@@ -1,6 +1,3 @@
-<script setup>
-import FloorComponent from "@/components/FloorComponent.vue";</script>
-
 <template>
     <div class="building">
         <div class="floors">
@@ -11,6 +8,10 @@ import FloorComponent from "@/components/FloorComponent.vue";</script>
         </div>
     </div>
 </template>
+
+<script setup>
+import FloorComponent from "@/components/FloorComponent.vue";
+</script>
 
 <style scoped>
 .building {

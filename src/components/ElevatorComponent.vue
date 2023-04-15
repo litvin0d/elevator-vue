@@ -1,3 +1,7 @@
+<template>
+    <div :style="elevator" class="elevator"></div>
+</template>
+
 <script setup>
 import { ref } from "vue";
 
@@ -19,9 +23,6 @@ const stop = () => {
     direction = 0;
     store.state.elCurrentFloor = destinationFloors.shift();
     elevator.value.opacity = "1";
-    if (store.state.elCurrentFloor !== 1) { // удаление класса active у кнопки
-        store.commit("removeBtnActive");
-    }
     pause().then(() => {
         elevatorHandler();
     });
@@ -80,10 +81,6 @@ const callHandler = (floorNum) => {
 
 store.commit("setHandler", callHandler);
 </script>
-
-<template>
-    <div :style="elevator" class="elevator"></div>
-</template>
 
 <style scoped>
 .elevator {

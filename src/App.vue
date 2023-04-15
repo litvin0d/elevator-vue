@@ -1,8 +1,3 @@
-<script setup>
-import BuildingComponent from "@/components/BuildingComponent.vue";
-// import ParamsComponent from "@/components/ParamsComponent.vue";
-</script>
-
 <template>
     <main>
         <!--<ParamsComponent />-->
@@ -10,6 +5,11 @@ import BuildingComponent from "@/components/BuildingComponent.vue";
         <div class="ground"></div>
     </main>
 </template>
+
+<script setup>
+import BuildingComponent from "@/components/BuildingComponent.vue";
+// import ParamsComponent from "@/components/ParamsComponent.vue";
+</script>
 
 <style scoped>
 * {

@@ -1,7 +1,3 @@
-<script>
-
-</script>
-
 <template>
     <div class="params">
         <p>Number of floors:</p>
@@ -13,6 +9,10 @@
         </select>
     </div>
 </template>
+
+<script>
+
+</script>
 
 <style>
 .params {

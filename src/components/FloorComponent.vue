@@ -1,12 +1,20 @@
+<template>
+    <div class="floor">
+        <div class="shaft"></div>
+        <div class="btn-wrapper">
+            <h2>{{ floorNum }}</h2>
+            <button @click="handler(floorNum)" :class="['btn', `floor-${floorNum}`]">&middot;
+            </button>
+        </div>
+        <ElevatorComponent v-if="isInit" />
+    </div>
+</template>
+
 <script setup>
-import { defineProps, ref } from "vue";
+import { defineProps } from "vue";
 
 import { store } from "@/store";
 import ElevatorComponent from "@/components/ElevatorComponent.vue";
-
-const btn = ref({});
-store.commit("setBtn", btn);
-console.log(store.state.isBtnActive.value);
 
 defineProps({
     floorNum: {
@@ -21,23 +29,10 @@ defineProps({
 
 const handler = (floorNum) => {
     if (store.state.elCurrentFloor !== floorNum) {
-        store.commit("setBtnActive");
         store.state.handler(floorNum);
     }
 };
 </script>
-
-<template>
-    <div class="floor">
-        <div class="shaft"></div>
-        <div class="btn-wrapper">
-            <h2>{{ floorNum }}</h2>
-            <button @click="handler(floorNum)" :class="['btn', `floor-${floorNum}`]" :style="btn">&middot;
-            </button>
-        </div>
-        <ElevatorComponent v-if="isInit" />
-    </div>
-</template>
 
 <style scoped>
 .floor {
@@ -75,7 +70,7 @@ const handler = (floorNum) => {
     -webkit-tap-highlight-color: #ffffff00;
 }
 
-.active {
-    color: red;
-}
+/*.active {*/
+/*    color: red;*/
+/*}*/
 </style>
