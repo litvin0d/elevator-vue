@@ -1,0 +1,26 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    position: relative;
+    font-weight: normal;
+}
+
+:root {
+    --elevator: #868688;
+    --building: #7a7a7c;
+    --ground: #3e3c24;
+    --btn: #aeb2ba;
+}
+
+body {
+    color: #fff;
+    transition: color 0.5s, background-color 0.5s;
+    line-height: 1.6;
+    font-family: monospace;
+    font-size: 15px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
