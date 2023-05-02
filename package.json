@@ -1,10 +1,12 @@
 {
   "name": "elevator-vue",
   "version": "0.0.0",
+  "homepage": "https://litvin0d.github.io/elevator-vue/",
   "private": true,
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
+    "deploy": "gh-pages -d dist",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit",
@@ -12,6 +14,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "gh-pages": "^5.0.0",
     "vue": "^3.2.47",
     "vuex": "^4.0.2"
   },

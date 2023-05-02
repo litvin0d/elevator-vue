@@ -1,20 +1,22 @@
 <template>
-    <button @click="toggleParamsModal">
+    <button @click="toggleModal">
         <params-icon />
     </button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapMutations } from "vuex";
 import ParamsIcon from "@/assets/icons/ParamsIcon.vue";
+import { store } from "@/store/store";
 
 export default defineComponent({
     components: {
         ParamsIcon
     },
-    computed: {
-        ...mapMutations(["toggleParamsModal"])
+    methods: {
+        toggleModal() {
+            store.commit("toggleParamsModal");
+        }
     }
 });
 </script>
@@ -30,7 +32,7 @@ button {
     height: 40px;
     padding: 0;
     cursor: pointer;
-    transition: transform .25s ease-in-out;
+    transition: transform 0.25s ease-in-out;
 }
 
 button:focus {

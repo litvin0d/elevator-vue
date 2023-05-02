@@ -13,7 +13,6 @@ import ParamsButton from "@/components/ParamsButton.vue";
 import ParamsModal from "@/components/ParamsModal.vue";
 import BuildingComponent from "@/components/BuildingComponent.vue";
 import GroundComponent from "@/components/GroundComponent.vue";
-
 export default defineComponent({
     components: {
         ParamsButton,

@@ -1,28 +1,42 @@
 <template>
-    <div class="overlay" v-if="showParamsModal" @click.self="toggleParamsModal">
+    <div class="overlay" v-if="showParamsModal" @click.self="toggleModal">
         <form @submit.prevent="submitParams">
             <h2>Parameters</h2>
             <div class="params">
                 <label>
                     floors number:
                     <select v-model="floorsNum">
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                        <option :value="2">2</option>
+                        <option :value="3">3</option>
+                        <option :value="4">4</option>
+                        <option :value="5">5</option>
                     </select>
                 </label>
                 <label>
                     floor height (px):
-                    <input v-model="floorHeight" type="number" placeholder="px" :min="85" :max="200">
+                    <input
+                        v-model="floorHeight"
+                        type="number"
+                        placeholder="px"
+                        :min="85"
+                        :max="200"
+                    />
                 </label>
                 <label>
-                    speed (px/ms):
-                    <input v-model="speed" type="number" placeholder="px/ms" :min="1" :max="10">
+                    elevators number:
+                    <select v-model="elevatorsNumber">
+                        <option :value="1">1</option>
+                        <option :value="2">2</option>
+                        <option :value="3">3</option>
+                    </select>
+                </label>
+                <label>
+                    elevator speed:
+                    <input v-model="speed" type="number" placeholder="px/ms" :min="1" :max="10" />
                 </label>
             </div>
             <div class="buttons">
-                <button @click="toggleParamsModal">Close</button>
+                <button @click="toggleModal">Close</button>
                 <button type="submit">SUBMIT</button>
             </div>
         </form>
@@ -31,32 +45,28 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters } from "vuex";
 import { store } from "@/store/store";
-
-interface Params {
-    floors: number[],
-    floorHeight: number,
-    speed: number,
-}
+import type { Params } from "../../env";
 
 export default defineComponent({
     data() {
         return {
             floorsNum: 3,
             floorHeight: 100,
+            elevatorsNumber: 1,
             speed: 2
         };
     },
     computed: {
-        ...mapGetters(["showParamsModal"]),
-        ...mapMutations(["toggleParamsModal"])
+        ...mapGetters(["showParamsModal"])
     },
     methods: {
         submitParams() {
             // если выбранные значения не соответствуют ограничениям, то присваиваются дефолтные
             (!this.floorsNum || this.floorsNum < 2 || this.floorsNum > 5) && (this.floorsNum = 3);
             (!this.floorHeight || this.floorHeight < 85 || this.floorHeight > 200) && (this.floorHeight = 100);
+            (!this.elevatorsNumber || this.elevatorsNumber < 1 || this.elevatorsNumber > 3) && (this.elevatorsNumber = 1);
             (!this.speed || this.speed < 1 || this.speed > 10) && (this.speed = 2);
 
             // создание массива этажей (от 1 до floorsNum)
@@ -65,22 +75,26 @@ export default defineComponent({
             const params: Params = {
                 floors: floors.reverse(),
                 floorHeight: this.floorHeight,
+                elevatorsNumber: this.elevatorsNumber,
                 speed: this.speed
             };
 
             store.commit("setParams", params);
+        },
+
+        toggleModal() {
+            store.commit("toggleParamsModal");
         }
     }
 });
 </script>
-
 
 <style scoped>
 .overlay {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: #000000C4;
+    background: #000000c4;
     z-index: 1;
     display: flex;
     justify-content: center;
@@ -110,7 +124,8 @@ form {
     justify-content: space-between;
 }
 
-.params > label > select, input {
+.params > label > select,
+input {
     width: 64px;
     background: #000;
     color: #fff;
@@ -130,7 +145,7 @@ form {
     cursor: pointer;
     padding: 0;
     font-size: 16px;
-    transition: all .25s ease-in-out;
+    transition: all 0.25s ease-in-out;
 }
 
 .buttons > button:hover {

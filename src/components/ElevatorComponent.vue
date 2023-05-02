@@ -24,20 +24,27 @@ export default defineComponent({
         ...mapGetters(["floorHeight", "destinationFloors", "speed", "elCurrentFloor"])
     },
     mounted() {
-        watch(() => this.destinationFloors.length, (newLength, oldLength) => {
-            if (newLength > oldLength) {
-                this.callHandler();
-            }
-        }, { deep: true });
+        watch(
+            () => this.destinationFloors.length,
+            (newLength, oldLength) => {
+                if (newLength > oldLength) {
+                    this.callHandler();
+                }
+            },
+            { deep: true }
+        );
 
-        watch(() => this.floorHeight, () => {
-            this.elevator.height = `${this.floorHeight}px`;
-        });
+        watch(
+            () => this.floorHeight,
+            () => {
+                this.elevator.height = `${this.floorHeight}px`;
+            }
+        );
     },
     methods: {
         // ожидание
         pause() {
-            return new Promise(r => setTimeout(r, this.wait));
+            return new Promise((r) => setTimeout(r, this.wait));
         },
 
         // действия после остановки лифта
@@ -51,7 +58,8 @@ export default defineComponent({
         // анимация движения лифта
         move() {
             this.elevator.opacity = "0.5";
-            this.elevator.transform = `translateY(${this.posY += this.speed * -this.direction}px)`;
+            this.elevator.transform = `translateY(${(this.posY +=
+                this.speed * -this.direction)}px)`;
 
             if (this.direction === -1) {
                 if (this.posY < -(store.getters.destinationFloors[0] - 1) * this.floorHeight) {
@@ -78,7 +86,8 @@ export default defineComponent({
 
             if (this.elCurrentFloor > store.getters.destinationFloors[0]) {
                 this.direction = -1;
-                if (store.getters.destinationFloors[1] < this.elCurrentFloor) { // если следующий этаж меньше текущего
+                if (store.getters.destinationFloors[1] < this.elCurrentFloor) {
+                    // если следующий этаж меньше текущего
                     store.commit("shiftDestinationFloors");
                 }
                 requestAnimationFrame(() => this.move());
@@ -103,7 +112,7 @@ export default defineComponent({
 .elevator {
     position: absolute;
     border: 1px solid #2b2b38;
-    width: 100px;
+    width: 99px;
     height: 100px;
     background-color: #2b2b38;
     background-image: url("../assets/img/elevator.jpg");

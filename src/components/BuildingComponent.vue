@@ -7,9 +7,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
-import FloorComponent from '@/components/FloorComponent.vue'
+import FloorComponent from "@/components/FloorComponent.vue";
 
 export default defineComponent({
     components: {
@@ -18,9 +18,8 @@ export default defineComponent({
     computed: {
         ...mapGetters(["floors"])
     }
-})
+});
 </script>
-
 
 <style scoped>
 .building {

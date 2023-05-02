@@ -2,21 +2,26 @@ import type { State } from "../../../env";
 
 export const elevatorModule = {
     state: {
+        // elevators: [
+        //     {
+        //
+        //     },
+        //     {
+        //
+        //     }
+        // ],
         elCurrentFloor: 1,
-        destinationFloors: [],
+        destinationFloors: []
     },
     mutations: {
-        setElCurrentFloor(state: State, payload: number): void {
-            state.elCurrentFloor = payload;
-        },
         shiftDestinationFloors(state: State): void {
-            state.elCurrentFloor = state.destinationFloors.shift()
+            state.elCurrentFloor = state.destinationFloors.shift();
         },
         pushDestinationFloors(state: State, payload: number): void {
             if (state.destinationFloors.indexOf(payload) === -1) {
                 state.destinationFloors.push(payload, 1);
             }
-        },
+        }
     },
     getters: {
         elCurrentFloor(state: State): number | undefined {
@@ -26,4 +31,4 @@ export const elevatorModule = {
             return state.destinationFloors;
         }
     }
-}
+};

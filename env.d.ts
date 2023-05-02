@@ -2,6 +2,7 @@
 export interface Params {
     floors: number[],
     floorHeight: number,
+    elevatorsNumber: number,
     speed: number,
 }
 

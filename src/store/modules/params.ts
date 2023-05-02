@@ -6,8 +6,9 @@ export const paramsModule = {
         params: {
             floors: [3, 2, 1],
             floorHeight: 100,
+            elevatorsNumber: 1,
             speed: 2
-        },
+        }
     },
     mutations: {
         toggleParamsModal(state: State): void {
@@ -17,7 +18,7 @@ export const paramsModule = {
         setParams(state: State, payload: Params): void {
             state.params = payload;
             state.showParamsModal = false;
-        },
+        }
     },
     getters: {
         showParamsModal(state: State): boolean {
@@ -29,8 +30,11 @@ export const paramsModule = {
         floorHeight(state: State): number {
             return state.params.floorHeight;
         },
+        elevatorsNumber(state: State): number {
+            return state.params.elevatorsNumber
+        },
         speed(state: State): number {
             return state.params.speed;
-        },
+        }
     }
 };
